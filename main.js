@@ -1,7 +1,7 @@
 const program = require("commander");
 const fs = require("fs");
-// package convert MD to HTML
-const marked = require("marked");
+// import md2html module
+const md2html = require("./md2html");
 
 // get file path from CL arg
 program.option("--gfm", "GFMを有効にする");
@@ -23,8 +23,7 @@ fs.readFile(filePath, { encoding: "utf8" }, (err, file) => {
     return;
   }
 
-  const html = marked(file, {
-    gfm: cliOptions.gfm,
-  });
+  // convert MD to HTML by md2html module
+  const html = md2html(file, cliOptions);
   console.log(html);
 });
